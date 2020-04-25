@@ -1,3 +1,13 @@
+import 'reflect-metadata';
+
+const unionStructMetaField = Symbol('bitFields');
+
+export type BitFieldMetaInfo = {
+  name: string,
+  lowBitNth: number,
+  highBitNth: number,
+};
+
 /**
  * Simple structure that holds bitfiels
  *
@@ -14,6 +24,49 @@ export default class UnionStruct {
   }
 
   /**
+   * Unpack struct union into plain object (non UnionStruct)
+   *
+   * @template T
+   * @returns
+   * @memberof UnionStruct
+   */
+  unpack<T extends typeof UnionStruct>() {
+    const output: {
+      [key in keyof Omit<InstanceType<T>, 'number'|'toString'>]?: number
+    } = {};
+
+    const bitFields: BitFieldMetaInfo[] = Reflect.getOwnMetadata(unionStructMetaField, this.constructor);
+    if (bitFields) {
+      bitFields.forEach(({name}) => {
+        output[name] = this[name];
+      });
+    }
+
+    return output;
+  }
+
+  /**
+   * Converts plain object with fields from UnionStruct to UnionStruct
+   *
+   * @static
+   * @template T
+   * @param {T} this
+   * @returns {InstanceType<T>}
+   * @memberof UnionStruct
+   */
+  static pack<T extends typeof UnionStruct>(
+    this: T,
+    obj: {[key in keyof Omit<InstanceType<T>, 'number'|'toString'>]?: number},
+  ): InstanceType<T> {
+    const struct = (new this()) as InstanceType<T>;
+
+    for (const key in obj)
+      struct[key] = obj[key];
+
+    return struct;
+  }
+
+  /**
    * Marks class property as bit field
    *
    * @static
@@ -27,6 +80,22 @@ export default class UnionStruct {
     const shiftedNegatedMask = ~(mask << lowBitNth);
 
     return function decorator(target: UnionStruct, propertyKey: string) {
+      const existingBitFields: BitFieldMetaInfo[] = (
+        Reflect.getOwnMetadata(unionStructMetaField, target.constructor) || []
+      );
+
+      if (existingBitFields.find((item) => item.name === propertyKey))
+        throw new Error('Redefined bit field!');
+
+      existingBitFields.push(
+        {
+          name: propertyKey,
+          lowBitNth,
+          highBitNth,
+        },
+      );
+
+      Reflect.defineMetadata(unionStructMetaField, existingBitFields, target.constructor);
       Object.defineProperty(
         target,
         propertyKey,

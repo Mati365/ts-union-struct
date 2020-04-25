@@ -21,10 +21,22 @@ class Register extends UnionStruct {
 // later in code..
 const reg = new Register(0xFF_EE);
 
-console.log(reg.number); // => 0xFF_EE
+reg.number; // => 0xFF_EE
 reg.low = 0x0;
-console.log(reg.number); // => 0xFF_00
+reg.number; // => 0xFF_00
 
+// pack plain object into union
+const reg1 = Register.pack(
+  {
+    low: 0x0,
+    high: 0xFF,
+  }
+);
+reg1.number; // => 0xFF_00
+
+// unpack
+const reg = new Register(0xFF_EE);
+reg.unpac(); // {low: 0xEE, high: 0xFF}
 ```
 
 ## License

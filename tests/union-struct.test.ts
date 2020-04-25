@@ -9,7 +9,7 @@ class Register extends UnionStruct {
 }
 
 describe('struct test', () => {
-  const reg = new Register;
+  let reg = new Register;
 
   it('handles multiple bits fields', () => {
     reg.number = 0x00_00;
@@ -31,5 +31,27 @@ describe('struct test', () => {
 
     reg.msb = 1;
     expect(reg.msb).toEqual(0x1);
+  });
+
+  it('packs object', () => {
+    reg = Register.pack(
+      {
+        high: 0xFFF,
+        low: 0x0,
+      },
+    );
+
+    expect(reg.number).toEqual(0xFF_00);
+  });
+
+  it('unpack object', () => {
+    reg.number = 0x10_FF;
+
+    expect(reg.unpack()).toMatchObject(
+      {
+        low: 0xFF,
+        high: 0x10,
+      },
+    );
   });
 });
