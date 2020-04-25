@@ -46,6 +46,18 @@ export default class UnionStruct {
   }
 
   /**
+   * Create instance of structure from number
+   *
+   * @static
+   * @param {number} number
+   * @returns {UnionStruct}
+   * @memberof UnionStruct
+   */
+  static from(number: number): UnionStruct {
+    return new UnionStruct(number);
+  }
+
+  /**
    * Converts plain object with fields from UnionStruct to UnionStruct
    *
    * @static
