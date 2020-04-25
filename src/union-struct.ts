@@ -43,3 +43,5 @@ export default class UnionStruct {
     };
   }
 }
+
+export const {bits} = UnionStruct;

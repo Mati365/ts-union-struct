@@ -8,14 +8,14 @@ Small typescript utility class that helps with creating bit fields and C unions
 ## Usage
 
 ```typescript
-import UnionStruct from 'ts-union-struct';
+import UnionStruct, {bits} from 'ts-union-struct';
 
 class Register extends UnionStruct {
-  @UnionStruct.bits(0) lsb: number;
-  @UnionStruct.bits(15) msb: number;
+  @bits(0) lsb: number;
+  @bits(15) msb: number;
 
-  @UnionStruct.bits(0, 7) low: number;
-  @UnionStruct.bits(8, 15) high: number;
+  @bits(0, 7) low: number;
+  @bits(8, 15) high: number;
 }
 
 // later in code..
