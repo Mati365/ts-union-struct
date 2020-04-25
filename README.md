@@ -36,7 +36,7 @@ reg1.number; // => 0xFF_00
 
 // unpack
 const reg = new Register(0xFF_EE);
-reg.unpac(); // {low: 0xEE, high: 0xFF}
+reg.unpack(); // {low: 0xEE, high: 0xFF}
 ```
 
 ## License
