@@ -2,7 +2,7 @@
   "scripts": {
     "test": "node_modules/.bin/jest --c config/jest.config.js",
     "build": "rm -rf ./dist/ && NODE_ENV=production node_modules/.bin/tsc --project tsconfig.json",
-    "prepack": "yarn run build"
+    "prepublish": "yarn run build"
   },
   "husky": {
     "hooks": {
@@ -11,6 +11,7 @@
   },
   "main": "dist/union-struct.js",
   "types": "dist/union-struct.d.ts",
+  "typings": "dist/union-struct.d.ts",
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
@@ -32,5 +33,5 @@
     "typescript": "^3.8.3"
   },
   "name": "ts-union-struct",
-  "version": "1.0.2"
+  "version": "1.0.3"
 }
