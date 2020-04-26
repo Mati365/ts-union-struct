@@ -10,7 +10,7 @@
     }
   },
   "main": "dist/union-struct.js",
-  "types": "dist/union-stuct.d.ts",
+  "types": "dist/union-struct.d.ts",
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
@@ -32,5 +32,5 @@
     "typescript": "^3.8.3"
   },
   "name": "ts-union-struct",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
