@@ -5,6 +5,11 @@
 
 Small typescript utility class that helps with creating bit fields and C unions
 
+## Installation
+```
+yarn add ts-union-struct
+```
+
 ## Usage
 
 ```typescript
