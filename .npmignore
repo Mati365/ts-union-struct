@@ -1,0 +1,7 @@
+node_modules/
+tests/
+config/
+tsconfig.json
+LICENSE
+.eslintrc.yml
+.gitignore
