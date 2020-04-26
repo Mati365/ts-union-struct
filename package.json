@@ -26,13 +26,14 @@
     "jest": "^25.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "reflect-metadata": "^0.1.13",
     "ts-jest": "^25.4.0",
     "ts-loader": "^7.0.1",
     "tslib": "^1.10.0",
     "typescript": "^3.8.3",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "reflect-metadata": "^0.1.13"
+    "webpack-cli": "^3.3.10"
   },
-  "name": "ts-union-struct"
+  "name": "ts-union-struct",
+  "version": "1.0.0"
 }
